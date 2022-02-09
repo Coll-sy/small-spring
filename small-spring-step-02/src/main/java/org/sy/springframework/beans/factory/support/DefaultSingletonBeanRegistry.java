@@ -1,12 +1,12 @@
-package org.sy.springframework.beans.factory.config;
+package org.sy.springframework.beans.factory.support;
 
-import org.sy.springframework.beans.factory.support.SingletonBeanRegistry;
+import org.sy.springframework.beans.factory.config.SingletonBeanRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @description:
+ * @description: 单例底层仓库
  * @author: SunYang
  * @date: 2022/2/9
  * @Copyright： sunyangqaq@foxmail.com

@@ -1,7 +1,7 @@
 package org.sy.springframework.beans.factory.config;
 
 /**
- * @description:
+ * @description: 一个bean定义
  * @author: SunYang
  * @date: 2022/2/9
  * @Copyright： sunyangqaq@foxmail.com

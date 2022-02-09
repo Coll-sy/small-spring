@@ -7,5 +7,7 @@ package org.sy.springframework.beans;
  * @Copyright： sunyangqaq@foxmail.com
  */
 public class BeansException extends Exception{
-
+    public BeansException(String message, Exception e) {
+        super(message, e);
+    }
 }

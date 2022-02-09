@@ -1,11 +1,11 @@
 package org.sy.springframework.beans.factory.support;
 
 import org.sy.springframework.beans.BeansException;
+import org.sy.springframework.beans.factory.BeanFactory;
 import org.sy.springframework.beans.factory.config.BeanDefinition;
-import org.sy.springframework.beans.factory.config.DefaultSingletonBeanRegistry;
 
 /**
- * @description: 抽类实现模板类
+ * @description: 抽类实现模板类,其他实现类定义创建bean方法
  * @author: SunYang
  * @date: 2022/2/9
  * @Copyright： sunyangqaq@foxmail.com
@@ -21,10 +21,8 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
         if (bean != null) {
             return bean;
         }
-
         //3.创建该bean
         BeanDefinition beanDefinition = getBeanDefinition(beanName);
-
         return createBean(beanName, beanDefinition);
     }
 
