@@ -4,7 +4,7 @@ import org.sy.springframework.beans.BeansException;
 import org.sy.springframework.beans.factory.config.BeanDefinition;
 
 /**
- * @description:
+ * @description:实例化Bean类 即能创建Bean
  * @author: SunYang
  * @date: 2022/2/9
  * @Copyright： sunyangqaq@foxmail.com
