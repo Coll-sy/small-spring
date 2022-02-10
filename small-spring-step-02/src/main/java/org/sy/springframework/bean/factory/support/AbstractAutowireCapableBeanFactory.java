@@ -1,7 +1,7 @@
-package org.sy.springframework.beans.factory.support;
+package org.sy.springframework.bean.factory.support;
 
-import org.sy.springframework.beans.BeansException;
-import org.sy.springframework.beans.factory.config.BeanDefinition;
+import org.sy.springframework.bean.BeansException;
+import org.sy.springframework.bean.factory.config.BeanDefinition;
 
 /**
  * @description:实例化Bean类 即能创建Bean

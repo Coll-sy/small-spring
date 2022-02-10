@@ -1,4 +1,4 @@
-package org.sy.springframework.beans;
+package org.sy.springframework.bean;
 
 /**
  * @description:

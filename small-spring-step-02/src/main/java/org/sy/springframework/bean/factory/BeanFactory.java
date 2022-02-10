@@ -1,6 +1,6 @@
-package org.sy.springframework.beans.factory;
+package org.sy.springframework.bean.factory;
 
-import org.sy.springframework.beans.BeansException;
+import org.sy.springframework.bean.BeansException;
 
 /**
  * @description: beanFactory 抽象接口

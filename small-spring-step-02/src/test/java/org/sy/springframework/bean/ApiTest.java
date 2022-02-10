@@ -1,9 +1,9 @@
-package org.sy.springframework.beans;
+package org.sy.springframework.bean;
 
 import org.junit.Test;
-import org.sy.springframework.beans.bean.UserService;
-import org.sy.springframework.beans.factory.config.BeanDefinition;
-import org.sy.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.sy.springframework.bean.bean.UserService;
+import org.sy.springframework.bean.factory.config.BeanDefinition;
+import org.sy.springframework.bean.factory.support.DefaultListableBeanFactory;
 
 /**
  * @description:

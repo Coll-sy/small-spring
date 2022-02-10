@@ -1,6 +1,6 @@
-package org.sy.springframework.beans.factory.support;
+package org.sy.springframework.bean.factory.support;
 
-import org.sy.springframework.beans.factory.config.BeanDefinition;
+import org.sy.springframework.bean.factory.config.BeanDefinition;
 
 /**
  * @description:

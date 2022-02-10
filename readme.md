@@ -9,3 +9,9 @@
 
 
 ![02类图](./asset/pic/BeanDefinition.png "BeanDefinition")
+BeanDefinition 是定义一个组件的核心类，所有的组件信息都要被定义出来 即Class
+对象
+
+这里只是实现一个单例注册, 拿到BeanDefinition并定义到Map
+
+既要一个Map中拿到BeanDefinition, 也要从BeanDefinition中拿到Class实例化对象到Map中去。

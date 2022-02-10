@@ -1,4 +1,4 @@
-package org.sy.springframework.beans.factory.config;
+package org.sy.springframework.bean.factory.config;
 
 /**
  * @description:
