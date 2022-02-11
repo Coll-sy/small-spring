@@ -1,7 +1,11 @@
-package bean.factory.support;
+package org.sy.springframework.bean.factory.support;
 
+import cn.hutool.core.bean.BeanUtil;
 import org.sy.springframework.bean.BeansException;
+import org.sy.springframework.bean.factory.PropertyValue;
+import org.sy.springframework.bean.factory.PropertyValues;
 import org.sy.springframework.bean.factory.config.BeanDefinition;
+import org.sy.springframework.bean.factory.config.BeanReference;
 
 import java.lang.reflect.Constructor;
 
@@ -21,12 +25,32 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object bean = null;
         try {
             bean = createBeanInstance(beanDefinition, beanName, args);
+            //填充Bean属性
+            this.applyPropertyValues(beanName, bean, beanDefinition);
         } catch (Exception e) {
             throw new BeansException("Instantiation of bean failed", e);
         }
         addSingleton(beanName, bean);
         return bean;
     }
+
+    protected void applyPropertyValues(String beanName, Object bean, BeanDefinition beanDefinition) {
+        try {
+            PropertyValues propertyValues = beanDefinition.getPropertyValues();
+            for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                String name = propertyValue.getName();
+                Object value = propertyValue.getValue();
+                if (value instanceof BeanDefinition) {
+                    BeanReference beanReference = (BeanReference) value;
+                    value = getBean(beanReference.getBeanName());
+                }
+                BeanUtil.setFieldValue(bean, name, value);
+            }
+        } catch (Exception e) {
+            throw new BeansException("Error setting property values: " + beanName);
+        }
+    }
+
 
     protected Object createBeanInstance(BeanDefinition beanDefinition, String beanName, Object[] args) {
         Constructor<?> constructorToUse = null;
@@ -39,5 +63,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             }
         }
         return instantiationStrategy.instantiation(beanDefinition, beanName, constructorToUse, args);
+    }
+
+    public InstantiationStrategy getInstantiationStrategy() {
+        return instantiationStrategy;
+    }
+
+    public void setInstantiationStrategy(InstantiationStrategy instantiationStrategy) {
+        this.instantiationStrategy = instantiationStrategy;
     }
 }

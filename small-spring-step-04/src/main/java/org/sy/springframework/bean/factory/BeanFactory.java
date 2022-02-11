@@ -1,4 +1,4 @@
-package bean.factory;
+package org.sy.springframework.bean.factory;
 
 import org.sy.springframework.bean.BeansException;
 
