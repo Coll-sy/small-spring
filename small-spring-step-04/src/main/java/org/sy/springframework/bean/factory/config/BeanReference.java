@@ -6,7 +6,19 @@ package org.sy.springframework.bean.factory.config;
  * @date: 2022/2/11
  * @Copyright： sunyangqaq@foxmail.com
  */
-public interface BeanReference {
+public class BeanReference {
 
-    String getBeanName();
+    private String beanName;
+
+    public BeanReference(String beanName) {
+        this.beanName = beanName;
+    }
+
+    public String getBeanName() {
+        return beanName;
+    }
+
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
+    }
 }
