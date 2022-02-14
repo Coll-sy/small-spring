@@ -1,13 +1,21 @@
 package org.sy.springframework.test;
 
+import cn.hutool.core.io.IoUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.sy.springframework.beans.factory.PropertyValue;
 import org.sy.springframework.beans.factory.PropertyValues;
 import org.sy.springframework.beans.factory.config.BeanDefinition;
 import org.sy.springframework.beans.factory.config.BeanReference;
 import org.sy.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.sy.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.sy.springframework.core.io.DefaultResourceLoader;
+import org.sy.springframework.core.io.Resource;
 import org.sy.springframework.test.bean.UserDao;
 import org.sy.springframework.test.bean.UserService;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @description:
@@ -16,25 +24,47 @@ import org.sy.springframework.test.bean.UserService;
  * @Copyright： sunyangqaq@foxmail.com
  */
 public class ApiTest {
+
+    private DefaultResourceLoader resourceLoader;
+
+    @Before
+    public void init() {
+        resourceLoader = new DefaultResourceLoader();
+    }
+
     @Test
-    public void test_BeanFactory() {
-        // 1.初始化BeanFactory
+    public void test_classpath() throws IOException {
+        Resource resource = resourceLoader.getResource("classpath:spring.xml");
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
+
+    @Test
+    public void test_file() throws IOException {
+        Resource resource = resourceLoader.getResource("src/test/resources/important.properties");
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
+
+    @Test
+    public void test_url() throws IOException{
+        Resource resource = resourceLoader.getResource("https://www.w3school.com.cn/example/xmle/note.xml");
+        InputStream inputStream = resource.getInputStream();
+        String content = IoUtil.readUtf8(inputStream);
+        System.out.println(content);
+    }
+
+    @Test
+    public void text_xml() {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-        // 2.注册UserDAO
-        beanFactory.registerBeanDefinition("userDao", new BeanDefinition(UserDao.class));
 
-        // 3. UserService设置属性
-        PropertyValues propertyValues = new PropertyValues();
+        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        reader.loadBeanDefinitions("classpath:spring.xml");
 
-        propertyValues.addPropertyValue(new PropertyValue("uId","10001"));
-        propertyValues.addPropertyValue(new PropertyValue("userDao", new BeanReference("userDao")));
-
-        // 4.注入bean
-        BeanDefinition beanDefinition = new BeanDefinition(UserService.class, propertyValues);
-        beanFactory.registerBeanDefinition("userService", beanDefinition);
-        // 3.获取bean
-
-        UserService userService = (UserService) beanFactory.getBean("userService");
-        userService.queryUserInfo();
+        UserService userService = beanFactory.getBean("userService", UserService.class);
+        String result = userService.queryUserInfo();
+        System.out.println(result);
     }
 }
