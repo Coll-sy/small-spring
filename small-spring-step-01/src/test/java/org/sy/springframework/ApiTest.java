@@ -1,7 +1,7 @@
 package org.sy.springframework;
 
 import org.junit.Test;
-import org.sy.springframework.bean.UserService;
+import org.sy.springframework.beans.UserService;
 
 /**
  * @description:

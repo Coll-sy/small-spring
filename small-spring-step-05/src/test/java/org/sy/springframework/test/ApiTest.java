@@ -1,11 +1,11 @@
 package org.sy.springframework.test;
 
 import org.junit.Test;
-import org.sy.springframework.bean.factory.PropertyValue;
-import org.sy.springframework.bean.factory.PropertyValues;
-import org.sy.springframework.bean.factory.config.BeanDefinition;
-import org.sy.springframework.bean.factory.config.BeanReference;
-import org.sy.springframework.bean.factory.support.DefaultListableBeanFactory;
+import org.sy.springframework.beans.factory.PropertyValue;
+import org.sy.springframework.beans.factory.PropertyValues;
+import org.sy.springframework.beans.factory.config.BeanDefinition;
+import org.sy.springframework.beans.factory.config.BeanReference;
+import org.sy.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.sy.springframework.test.bean.UserDao;
 import org.sy.springframework.test.bean.UserService;
 
