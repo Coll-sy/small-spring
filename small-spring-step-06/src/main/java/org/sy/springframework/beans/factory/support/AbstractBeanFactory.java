@@ -6,6 +6,9 @@ import org.sy.springframework.beans.factory.config.BeanDefinition;
 import org.sy.springframework.beans.factory.config.BeanPostProcessor;
 import org.sy.springframework.beans.factory.config.ConfigurableBeanFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @description: 抽类实现模板类, 其他实现类定义创建bean方法
  * @author: SunYang
@@ -13,6 +16,8 @@ import org.sy.springframework.beans.factory.config.ConfigurableBeanFactory;
  * @Copyright： sunyangqaq@foxmail.com
  */
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements ConfigurableBeanFactory {
+
+    private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     @Override
     public Object getBean(String beanName) throws BeansException {
@@ -60,6 +65,11 @@ public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry i
 
     @Override
     public void addBeanPostProcessor(BeanPostProcessor beanPostProcessor) {
+        this.beanPostProcessors.remove(beanPostProcessor);
+        this.beanPostProcessors.add(beanPostProcessor);
+    }
 
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
     }
 }
