@@ -18,7 +18,4 @@ public class BeanReference {
         return beanName;
     }
 
-    public void setBeanName(String beanName) {
-        this.beanName = beanName;
-    }
 }

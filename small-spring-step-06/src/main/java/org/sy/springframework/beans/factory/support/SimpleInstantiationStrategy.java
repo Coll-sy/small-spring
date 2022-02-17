@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 public class SimpleInstantiationStrategy implements InstantiationStrategy {
 
     @Override
-    public Object instantiation(BeanDefinition beanDefinition, String beanName, Constructor<?> ctor, Object[] args) throws BeansException {
+    public Object instantiate(BeanDefinition beanDefinition, String beanName, Constructor<?> ctor, Object[] args) throws BeansException {
         //反射 处理用户定义的类，即预先使用，反射优势及其劣势
         Class<?> clazz = beanDefinition.getBeanClass();
 

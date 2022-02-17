@@ -7,11 +7,12 @@ package org.sy.springframework.beans;
  * @Copyright： sunyangqaq@foxmail.com
  */
 public class BeansException extends RuntimeException{
-    public BeansException(String message, Throwable e) {
-        super(message, e);
+
+    public BeansException(String msg, Throwable cause) {
+        super(msg, cause);
     }
 
-    public BeansException(String message) {
-        super(message);
+    public BeansException(String msg) {
+        super(msg);
     }
 }

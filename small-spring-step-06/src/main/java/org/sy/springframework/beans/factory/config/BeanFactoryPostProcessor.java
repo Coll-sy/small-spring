@@ -1,6 +1,7 @@
 package org.sy.springframework.beans.factory.config;
 
 import org.sy.springframework.beans.BeansException;
+import org.sy.springframework.beans.factory.ConfigurableListableBeanFactory;
 
 /**
  * @description:
@@ -15,5 +16,5 @@ public interface BeanFactoryPostProcessor {
      * @param beanFactory beanFactory工厂
      * @throws BeansException Bean异常
      */
-    void postProcessBeanFactory(ConfigurableBeanFactory beanFactory) throws BeansException;
+    void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
 }

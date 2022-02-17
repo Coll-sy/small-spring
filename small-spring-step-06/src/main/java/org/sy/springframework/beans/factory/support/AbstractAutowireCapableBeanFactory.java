@@ -65,7 +65,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 break;
             }
         }
-        return instantiationStrategy.instantiation(beanDefinition, beanName, constructorToUse, args);
+        return getInstantiationStrategy().instantiate(beanDefinition, beanName, constructorToUse, args);
     }
 
     public InstantiationStrategy getInstantiationStrategy() {
@@ -84,8 +84,12 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return wrappedBean;
     }
 
+    private void invokeInitMethods(String beanName, Object wrappedBean, BeanDefinition beanDefinition) {
 
-    private Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName) {
+    }
+
+    @Override
+    public Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName) {
         Object result = existingBean;
         for (BeanPostProcessor processor : getBeanPostProcessors()) {
             Object current = processor.postProcessBeforeInitialization(result, beanName);
@@ -97,7 +101,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return result;
     }
 
-    private Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName) {
+    @Override
+    public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName) {
         Object result = existingBean;
         for (BeanPostProcessor processor : getBeanPostProcessors()) {
             Object current = processor.postProcessAfterInitialization(result, beanName);
@@ -107,9 +112,5 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             result = current;
         }
         return result;
-    }
-
-    private void invokeInitMethods(String beanName, Object wrappedBean, BeanDefinition beanDefinition) {
-
     }
 }
