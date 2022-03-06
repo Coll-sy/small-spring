@@ -10,19 +10,12 @@ import org.sy.springframework.context.ApplicationContextAware;
  * 公众号：bugstack虫洞栈
  * Create by 小傅哥(fustack)
  */
-public class UserService implements ApplicationContextAware, BeanFactoryAware, BeanNameAware, BeanClassLoaderAware {
-
-    private ApplicationContext applicationContext;
-
-    private ClassLoader classLoader;
-
-    private BeanFactory beanFactory;
-    private String name;
+public class UserService {
 
     private String uId;
     private String company;
     private String location;
-    private UserDao userDao;
+    private IUserDao userDao;
 
     public String queryUserInfo() {
         return userDao.queryUserName(uId) + "," + company + "," + location;
@@ -52,31 +45,11 @@ public class UserService implements ApplicationContextAware, BeanFactoryAware, B
         this.location = location;
     }
 
-    public UserDao getUserDao() {
+    public IUserDao getUserDao() {
         return userDao;
     }
 
-    public void setUserDao(UserDao userDao) {
+    public void setUserDao(IUserDao userDao) {
         this.userDao = userDao;
-    }
-
-    @Override
-    public void setBeanClassLoader(ClassLoader classLoader) {
-        System.out.println("bean classloader is " + classLoader);
-    }
-
-    @Override
-    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        this.beanFactory = beanFactory;
-    }
-
-    @Override
-    public void setBeanName(String name) {
-        System.out.println("bean name is " + name);
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
     }
 }
