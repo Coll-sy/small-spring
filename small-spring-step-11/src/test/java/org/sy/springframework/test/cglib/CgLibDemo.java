@@ -2,10 +2,14 @@ package org.sy.springframework.test.cglib;
 
 import net.sf.cglib.proxy.*;
 import org.junit.Test;
+import org.sy.springframework.test.bean.IUserService;
+import org.sy.springframework.test.bean.UserService;
 
 import java.lang.annotation.Target;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * @description:
@@ -47,7 +51,7 @@ public class CgLibDemo {
     }
 
     @Test
-    public void test_InterfaceMaker() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void test_interfaceMaker() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         InterfaceMaker interfaceMaker = new InterfaceMaker();
         interfaceMaker.add(TargetObject.class);
         Class<?> targetInterface = interfaceMaker.create();
@@ -76,5 +80,32 @@ public class CgLibDemo {
         int i = (int) targetMethod1.invoke(object, new Object[]{33});
         Method targetMethod = object.getClass().getMethod("method1", new Class[]{String.class});
         System.out.println(targetMethod.invoke(object, new Object[]{"add"}));
+    }
+
+    @Test
+    public void test_aop() {
+
+    }
+
+    @Test
+    public void test_proxy_class() {
+        IUserService iUserService = (IUserService) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class[] {IUserService.class}, (proxy, method, args) ->  "你被代理了" );
+        String result = iUserService.queryUserInfo();
+        System.out.println(result);
+    }
+
+    @Test
+    public void test_proxy_method() {
+        Object targetObj = new UserService();
+
+        IUserService proxy = (IUserService) Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), targetObj.getClass().getInterfaces(), new InvocationHandler() {
+
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+
+                return null;
+            }
+        });
     }
 }
