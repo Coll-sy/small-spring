@@ -2,6 +2,7 @@ package org.sy.springframework.test.cglib;
 
 import net.sf.cglib.proxy.*;
 import org.junit.Test;
+import org.sy.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.sy.springframework.test.bean.IUserService;
 import org.sy.springframework.test.bean.UserService;
 
@@ -83,8 +84,13 @@ public class CgLibDemo {
     }
 
     @Test
-    public void test_aop() {
+    public void test_aop() throws NoSuchMethodException {
+        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut("execution(* org.sy.springframework.test.bean.UserService.*(..))");
+        Class<UserService> clazz = UserService.class;
+        Method method = clazz.getDeclaredMethod("queryUserInfo");
 
+        System.out.println(pointcut.matches(clazz));
+        System.out.println(pointcut.matches(method, clazz));
     }
 
     @Test
